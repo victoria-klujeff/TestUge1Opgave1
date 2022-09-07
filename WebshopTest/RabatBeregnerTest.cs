@@ -48,6 +48,54 @@ namespace WebshopTest
             double pris = beregner.GetPrisEfterRabat(15, 10000);
             Assert.Equal(142500, pris);
         }
+
+        //Alternative solution
+
+        [Fact]
+        public void one_item_no_discount()
+        {
+            Rabatberegner beregner = new Rabatberegner();
+
+            double pris = beregner.GetPriceAfterDiscount(1, 100);
+
+            Assert.Equal(100, pris);
+        }
+
+        [Fact]
+        public void fifteen_items_trigger_discount()
+        {
+            Rabatberegner beregner = new Rabatberegner();
+
+            double pris = beregner.GetPriceAfterDiscount(15, 10);
+
+            // Normalpris er 15 x 10 = 150
+            // 2% rabat er 3
+            // Forventet pris efter rabat er 147
+            Assert.Equal(147.00, pris);
+        }
+        [Fact]
+        public void larger_order_trigger_discount()
+        {
+            Rabatberegner beregner = new Rabatberegner();
+
+            double pris = beregner.GetPriceAfterDiscount(1, 10000);
+
+            // Normalpris er 1 x 10000
+            // 3% rabat er 300
+            // Forventetpris efter rabat er 9700
+            Assert.Equal(9700, pris);
+
+        }
+
+        [Fact]
+        public void several_items_large_order_trigger_discount()
+        {
+            // Skriv din egen testkode her...
+            Rabatberegner beregner = new Rabatberegner();
+
+            double pris = beregner.GetPriceAfterDiscount(15, 10000);
+            Assert.Equal(142500, pris);
+        }
     }
     
 }
